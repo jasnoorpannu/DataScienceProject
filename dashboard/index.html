@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RetailIQ — Sales Analytics Dashboard</title>
+  <meta name="description" content="Interactive retail sales analytics dashboard showing monthly trends, top products, country analysis and descriptive statistics." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+
+  <style>
+    /* ══ RESET & TOKENS ════════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-base:     #08090d;
+      --bg-card:     #100c0c;
+      --bg-card2:    #160e0e;
+      --border:      rgba(255,255,255,0.07);
+      --border-glow: rgba(225,29,72,0.40);
+      --text-1:      #f8f4f4;
+      --text-2:      #b0a8a8;
+      --text-3:      #7a6868;
+      --accent:      #e11d48;
+      --accent-2:    #be123c;
+      --accent-3:    #fb7185;
+      --green:       #10b981;
+      --orange:      #f59e0b;
+      --pink:        #f43f5e;
+      --radius:      16px;
+      --shadow:      0 4px 32px rgba(0,0,0,0.60);
+
+      /* spacing scale */
+      --gap-sm:  12px;
+      --gap-md:  20px;
+      --gap-lg:  28px;
+      --pad-card: 24px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-base);
+      color: var(--text-1);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ══ ANIMATED BACKGROUND ORBS ══════════════════════════════════════════════ */
+    .bg-orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .bg-orbs::before, .bg-orbs::after {
+      content: ''; position: absolute; border-radius: 50%;
+      filter: blur(110px); opacity: 0.10;
+    }
+    .bg-orbs::before {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, #e11d48, transparent);
+      top: -80px; left: -80px;
+      animation: floatOrb 22s ease-in-out infinite alternate;
+    }
+    .bg-orbs::after {
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, #7f1d1d, transparent);
+      bottom: -60px; right: -60px;
+      animation: floatOrb 28s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes floatOrb { from { transform: translate(0,0); } to { transform: translate(50px,50px); } }
+
+    /* ══ LAYOUT WRAPPER ════════════════════════════════════════════════════════ */
+    .wrapper {
+      position: relative; z-index: 1;
+      max-width: 1440px; margin: 0 auto;
+      padding: 0 clamp(16px, 4vw, 40px) 60px;
+    }
+
+    /* ══ NAVBAR ════════════════════════════════════════════════════════════════ */
+    .navbar {
+      display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: space-between; gap: 12px;
+      padding: 20px 0 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    /* SVG bar-chart icon inside brand */
+    .brand-icon svg { width: 22px; height: 22px; fill: #fff; }
+    .brand-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(18px, 3vw, 22px); font-weight: 700;
+      background: linear-gradient(135deg, #f8f4f4, var(--accent-3));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .brand-sub { font-size: 12px; color: var(--text-3); }
+
+    .nav-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+    .badge {
+      padding: 4px 12px; border-radius: 999px;
+      background: rgba(225,29,72,0.12);
+      border: 1px solid rgba(225,29,72,0.28);
+      color: #fda4af; font-weight: 500; font-size: 12px;
+      white-space: nowrap;
+    }
+    .badge.green { background: rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.3); color: #6ee7b7; }
+
+    /* ══ SECTION TITLE ═════════════════════════════════════════════════════════ */
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px; font-weight: 600;
+      color: var(--text-3); text-transform: uppercase;
+      letter-spacing: 0.08em; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .section-title::before {
+      content: ''; display: block;
+      width: 3px; height: 14px; border-radius: 2px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent-2));
+    }
+
+    /* ══ KPI GRID ══════════════════════════════════════════════════════════════ */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap-sm);
+      margin-bottom: var(--gap-lg);
+    }
+    @media (max-width: 900px)  { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px)  { .kpi-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--pad-card);
+      position: relative; overflow: hidden;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+      cursor: default;
+    }
+    .kpi-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-glow);
+      box-shadow: 0 8px 40px rgba(99,102,241,0.14);
+    }
+    .kpi-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; border-radius: 2px 2px 0 0;
+    }
+    .kpi-card.c1::before { background: linear-gradient(90deg, #e11d48, #be123c); }
+    .kpi-card.c2::before { background: linear-gradient(90deg, #f43f5e, #e11d48); }
+    .kpi-card.c3::before { background: linear-gradient(90deg, #fb7185, #f43f5e); }
+    .kpi-card.c4::before { background: linear-gradient(90deg, #f59e0b, #f97316); }
+    .kpi-card.c5::before { background: linear-gradient(90deg, #10b981, #059669); }
+    .kpi-card.c6::before { background: linear-gradient(90deg, #6366f1, #8b5cf6); }
+
+    .kpi-icon {
+      width: 36px; height: 36px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px;
+    }
+    .kpi-icon svg { width: 18px; height: 18px; }
+    .kpi-card.c1 .kpi-icon { background: rgba(225,29,72,0.15); }
+    .kpi-card.c2 .kpi-icon { background: rgba(244,63,94,0.15); }
+    .kpi-card.c3 .kpi-icon { background: rgba(251,113,133,0.15); }
+    .kpi-card.c4 .kpi-icon { background: rgba(245,158,11,0.15); }
+    .kpi-card.c5 .kpi-icon { background: rgba(16,185,129,0.15); }
+    .kpi-card.c6 .kpi-icon { background: rgba(99,102,241,0.15); }
+
+    .kpi-label {
+      font-size: 11px; color: var(--text-3);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      font-weight: 600; margin-bottom: 5px;
+    }
+    .kpi-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(20px, 3vw, 26px); font-weight: 700;
+      line-height: 1.1; word-break: break-all;
+    }
+    .kpi-sub { font-size: 11px; color: var(--text-3); margin-top: 5px; }
+
+    /* hide icons on tiny screens to save space */
+    @media (max-width: 360px) { .kpi-icon { display: none; } }
+
+    /* ══ CHART GRID ════════════════════════════════════════════════════════════ */
+    .chart-grid { display: grid; gap: var(--gap-md); margin-bottom: var(--gap-md); }
+    .col-2   { grid-template-columns: repeat(2, 1fr); }
+    .col-3   { grid-template-columns: repeat(3, 1fr); }
+    .col-1-2 { grid-template-columns: 1fr 2fr; }
+    .col-2-1 { grid-template-columns: 2fr 1fr; }
+
+    @media (max-width: 900px) {
+      .col-2, .col-3, .col-1-2, .col-2-1 { grid-template-columns: 1fr; }
+    }
+
+    /* ══ CARD ══════════════════════════════════════════════════════════════════ */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--pad-card);
+      box-shadow: var(--shadow);
+      transition: border-color .25s;
+      /* prevent content from busting out */
+      min-width: 0;
+      overflow: hidden;
+    }
+    .card:hover { border-color: rgba(99,102,241,0.2); }
+
+    .card-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px; font-weight: 600;
+      color: var(--text-1); margin-bottom: 2px;
+    }
+    .card-sub { font-size: 12px; color: var(--text-3); margin-bottom: 20px; }
+
+    /* ══ CHART WRAPPER — responsive height ═════════════════════════════════════ */
+    .chart-wrap { position: relative; width: 100%; }
+    .chart-wrap canvas {
+      width: 100% !important;
+      max-height: 320px;
+    }
+    @media (max-width: 600px) { .chart-wrap canvas { max-height: 230px; } }
+    @media (max-width: 380px) { .chart-wrap canvas { max-height: 200px; } }
+
+    /* donut wrapper */
+    .donut-wrap {
+      position: relative; display: flex;
+      justify-content: center; align-items: center;
+      width: 100%; max-height: 300px;
+    }
+    .donut-wrap canvas { max-height: 300px !important; }
+    @media (max-width: 600px) { .donut-wrap canvas { max-height: 240px !important; } }
+
+    /* ══ TABS ══════════════════════════════════════════════════════════════════ */
+    .tabs {
+      display: flex; gap: 4px; margin-bottom: 20px;
+      background: var(--bg-card2); border-radius: 10px; padding: 4px;
+      /* scroll on narrow screens */
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      flex-shrink: 0;
+      padding: 8px 16px; border: none; background: transparent;
+      color: var(--text-3); font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 500; border-radius: 8px;
+      cursor: pointer; transition: all .2s; white-space: nowrap;
+    }
+    .tab-btn.active { background: linear-gradient(135deg, #e11d48, #be123c); color: #fff; }
+    .tab-btn:hover:not(.active) { color: var(--text-1); background: rgba(255,255,255,0.05); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ══ TABLE ═════════════════════════════════════════════════════════════════ */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 340px; }
+
+    thead tr th {
+      padding: 10px 12px; text-align: left;
+      color: var(--text-3); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); transition: background .15s; }
+    tbody tr:hover { background: rgba(99,102,241,0.06); }
+    tbody tr td { padding: 10px 12px; color: var(--text-2); }
+    tbody tr td:first-child { color: var(--text-1); font-weight: 500; }
+
+    /* truncate long product names in table */
+    .td-product {
+      max-width: 180px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .rank-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 6px;
+      font-size: 11px; font-weight: 700;
+    }
+    .rank-1 { background: rgba(245,158,11,0.2);  color: #fbbf24; }
+    .rank-2 { background: rgba(148,163,184,0.2); color: #94a3b8; }
+    .rank-3 { background: rgba(205,119,76,0.2);  color: #cd774c; }
+    .rank-n { background: rgba(225,29,72,0.12);  color: #fda4af; }
+
+    .bar-mini {
+      display: inline-block; height: 5px; border-radius: 3px;
+      background: linear-gradient(90deg, #e11d48, #fb7185);
+      min-width: 3px; vertical-align: middle;
+    }
+    .share-cell { white-space: nowrap; }
+
+    /* ══ INSIGHTS GRID ═════════════════════════════════════════════════════════ */
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap-sm);
+      margin-bottom: var(--gap-md);
+    }
+    @media (max-width: 900px) { .insights-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .insights-grid { grid-template-columns: 1fr; } }
+
+    .insight-card {
+      background: var(--bg-card2);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px;
+      display: flex; gap: 12px; align-items: flex-start;
+      transition: border-color .25s;
+    }
+    .insight-card:hover { border-color: rgba(225,29,72,0.28); }
+    .insight-icon {
+      width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(225,29,72,0.13);
+    }
+    .insight-icon svg { width: 17px; height: 17px; stroke: #fb7185; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .insight-title { font-size: 13px; font-weight: 600; color: var(--text-1); margin-bottom: 2px; }
+    .insight-value {
+      font-size: clamp(14px, 2.5vw, 18px); font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+      color: #fb7185; margin-bottom: 4px;
+      word-break: break-word;
+    }
+    .insight-text { font-size: 12px; color: var(--text-3); line-height: 1.6; }
+
+    /* ══ FOOTER ════════════════════════════════════════════════════════════════ */
+    .footer {
+      text-align: center; padding: 20px 0;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+      color: var(--text-3); font-size: 12px;
+    }
+
+    /* ══ LOADING ═══════════════════════════════════════════════════════════════ */
+    #loading {
+      position: fixed; inset: 0; z-index: 999;
+      background: var(--bg-base);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 16px;
+    }
+    .spinner {
+      width: 48px; height: 48px;
+      border: 3px solid rgba(225,29,72,0.18);
+      border-top-color: #e11d48; border-radius: 50%;
+      animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #loading p { color: var(--text-3); font-size: 14px; }
+
+    /* ══ SCROLLBAR ═════════════════════════════════════════════════════════════ */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg-base); }
+    ::-webkit-scrollbar-thumb { background: rgba(225,29,72,0.4); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<!-- Loading overlay -->
+<div id="loading">
+  <div class="spinner"></div>
+  <p>Analyzing retail data...</p>
+</div>
+
+<div class="bg-orbs"></div>
+
+<div class="wrapper" id="app" style="display:none">
+
+  <!-- ══ NAVBAR ══ -->
+  <nav class="navbar">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg>
+      </div>
+      <div>
+        <div class="brand-name">RetailIQ</div>
+        <div class="brand-sub">Sales Analytics Dashboard</div>
+      </div>
+    </div>
+    <div class="nav-badges">
+      <span class="badge green" id="date-range-badge">Loading...</span>
+      <span class="badge" id="records-badge">...</span>
+    </div>
+  </nav>
+
+  <!-- ══ KPI CARDS ══ -->
+  <div class="section-title">Key Performance Indicators</div>
+  <div class="kpi-grid">
+    <div class="kpi-card c1">
+      <div class="kpi-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fb7185" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <div class="kpi-label">Total Revenue</div>
+      <div class="kpi-value" id="kpi-revenue">—</div>
+      <div class="kpi-sub">All transactions</div>
+    </div>
+    <div class="kpi-card c2">
+      <div class="kpi-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fda4af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      </div>
+      <div class="kpi-label">Total Orders</div>
+      <div class="kpi-value" id="kpi-orders">—</div>
+      <div class="kpi-sub">Unique invoices</div>
+    </div>
+    <div class="kpi-card c3">
+      <div class="kpi-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fda4af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="kpi-label">Customers</div>
+      <div class="kpi-value" id="kpi-customers">—</div>
+      <div class="kpi-sub">Active buyers</div>
+    </div>
+    <div class="kpi-card c4">
+      <div class="kpi-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fde68a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      </div>
+      <div class="kpi-label">Avg Order Value</div>
+      <div class="kpi-value" id="kpi-aov">—</div>
+      <div class="kpi-sub">Per invoice</div>
+    </div>
+    <div class="kpi-card c5">
+      <div class="kpi-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <div class="kpi-label">Products</div>
+      <div class="kpi-value" id="kpi-products">—</div>
+      <div class="kpi-sub">Distinct SKUs</div>
+    </div>
+    <div class="kpi-card c6">
+      <div class="kpi-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      </div>
+      <div class="kpi-label">Units Sold</div>
+      <div class="kpi-value" id="kpi-units">—</div>
+      <div class="kpi-sub">Total quantity</div>
+    </div>
+  </div>
+
+  <!-- ══ MONTHLY TREND ══ -->
+  <div class="section-title">Sales Trends</div>
+  <div class="chart-grid" style="margin-bottom:var(--gap-md)">
+    <div class="card">
+      <div class="card-title">Monthly Revenue Trend</div>
+      <div class="card-sub">Revenue performance across the full dataset period</div>
+      <div class="tabs" id="trend-tabs">
+        <button class="tab-btn active" data-tab="trend-all">All Period</button>
+        <button class="tab-btn" data-tab="trend-2010">2010</button>
+        <button class="tab-btn" data-tab="trend-2011">2011</button>
+      </div>
+      <div class="tab-panel active" id="trend-all">
+        <div class="chart-wrap"><canvas id="chartMonthlyAll"></canvas></div>
+      </div>
+      <div class="tab-panel" id="trend-2010">
+        <div class="chart-wrap"><canvas id="chartYear2010"></canvas></div>
+      </div>
+      <div class="tab-panel" id="trend-2011">
+        <div class="chart-wrap"><canvas id="chartYear2011"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TOP PRODUCTS CHARTS ══ -->
+  <div class="section-title">Product Analysis</div>
+  <div class="chart-grid col-2">
+    <div class="card">
+      <div class="card-title">Top 10 Products by Revenue</div>
+      <div class="card-sub">Highest revenue-generating products</div>
+      <div class="chart-wrap"><canvas id="chartTopRevenue"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Top 10 Products by Volume</div>
+      <div class="card-sub">Most units purchased</div>
+      <div class="chart-wrap"><canvas id="chartTopQty"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ══ PRODUCT TABLES ══ -->
+  <div class="chart-grid col-2">
+    <div class="card">
+      <div class="card-title">Revenue Leaderboard</div>
+      <div class="card-sub">Ranked by total revenue generated</div>
+      <div class="table-wrap">
+        <table id="table-revenue">
+          <thead><tr><th>#</th><th>Product</th><th>Revenue</th><th>Share</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Volume Leaderboard</div>
+      <div class="card-sub">Ranked by units sold</div>
+      <div class="table-wrap">
+        <table id="table-qty">
+          <thead><tr><th>#</th><th>Product</th><th>Units</th><th>Share</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ COUNTRY + WEEKLY ══ -->
+  <div class="section-title">Market &amp; Behaviour Insights</div>
+  <div class="chart-grid col-2">
+    <div class="card">
+      <div class="card-title">Revenue by Country (Top 10)</div>
+      <div class="card-sub">Geographic sales distribution</div>
+      <div class="chart-wrap"><canvas id="chartCountry"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Sales by Day of Week</div>
+      <div class="card-sub">Which weekdays drive the most revenue</div>
+      <div class="chart-wrap"><canvas id="chartWeekly"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ══ HISTOGRAM + DONUT ══ -->
+  <div class="chart-grid col-2">
+    <div class="card">
+      <div class="card-title">Order Value Distribution</div>
+      <div class="card-sub">Orders grouped by basket value</div>
+      <div class="chart-wrap"><canvas id="chartHistogram"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Country Revenue Share</div>
+      <div class="card-sub">Top 10 markets as % of total revenue</div>
+      <div class="donut-wrap">
+        <canvas id="chartDonut"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ KEY INSIGHTS ══ -->
+  <div class="section-title">Key Insights &amp; Recommendations</div>
+  <div class="insights-grid" id="insights-grid"></div>
+
+  <footer class="footer">
+    RetailIQ &mdash; Built with Python &amp; Chart.js &nbsp;|&nbsp; Dataset: Online Retail II &nbsp;|&nbsp; &copy; 2025 Data Science Project
+  </footer>
+</div>
+
+<!-- ══════════════════════════ JAVASCRIPT ══════════════════════════════════ -->
+<script>
+/* ── Helpers ─────────────────────────────────────────────────────────────── */
+const fmt    = n => new Intl.NumberFormat('en-GB').format(Math.round(n));
+const fmtGBP = n => '£' + new Intl.NumberFormat('en-GB').format(Math.round(n));
+const fmtK   = n => n >= 1e6 ? '£'+(n/1e6).toFixed(2)+'M'
+                  : n >= 1e3 ? '£'+(n/1e3).toFixed(1)+'K'
+                  : '£'+Math.round(n);
+/* Red-spectrum palette — enough contrast variety for 10 segments */
+const COLORS = [
+  '#e11d48','#f59e0b','#10b981','#fb7185','#6366f1',
+  '#f97316','#06b6d4','#be123c','#a855f7','#84cc16'
+];
+const isMobile = () => window.innerWidth < 600;
+/* Registry to prevent duplicate chart instances (fixes glitch on tab switch) */
+const CHARTS = {};
+
+/* shared tooltip style */
+const TT = {
+  backgroundColor:'#1a0c0c', titleColor:'#f8f4f4', bodyColor:'#b0a8a8',
+  borderColor:'rgba(225,29,72,0.3)', borderWidth:1, padding:12,
+  titleFont:{ family:'Inter', size:13, weight:'600' },
+  bodyFont: { family:'Inter', size:12 },
+};
+
+const baseOpts = () => ({
+  responsive: true,
+  maintainAspectRatio: true,
+  animation: { duration: 600, easing: 'easeOutQuart' },
+  plugins: { legend:{ display:false }, tooltip: TT },
+  scales: {
+    x: { grid:{ color:'rgba(255,255,255,0.04)' }, ticks:{ color:'#64748b', font:{ size: isMobile()?9:11 } } },
+    y: { grid:{ color:'rgba(255,255,255,0.04)' }, ticks:{ color:'#64748b', font:{ size: isMobile()?9:11 }, callback: v => fmtK(v) } },
+  }
+});
+
+function mkGrad(ctx, colorHex) {
+  const g = ctx.createLinearGradient(0, 0, 0, 320);
+  const r  = parseInt(colorHex.slice(1,3),16);
+  const gv = parseInt(colorHex.slice(3,5),16);
+  const b  = parseInt(colorHex.slice(5,7),16);
+  g.addColorStop(0, `rgba(${r},${gv},${b},0.30)`);
+  g.addColorStop(1, `rgba(${r},${gv},${b},0.0)`);
+  return g;
+}
+
+function safeChart(id, config) {
+  if (CHARTS[id]) { CHARTS[id].destroy(); }
+  CHARTS[id] = new Chart(document.getElementById(id).getContext('2d'), config);
+}
+
+/* ── Data load ───────────────────────────────────────────────────────────── */
+fetch('sales_data.json')
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    populateKPIs(data.stats);
+    buildTrendCharts(data.monthly_trend, data.year_over_year);
+    buildProductCharts(data.top_products_revenue, data.top_products_quantity);
+    buildTables(data.top_products_revenue, data.top_products_quantity, data.stats.total_revenue);
+    buildCountryChart(data.country_sales);
+    buildWeeklyChart(data.weekly_pattern);
+    buildHistogram(data.order_histogram);
+    buildDonut(data.country_sales);
+    buildInsights(data);
+    setupTabs();
+  })
+  .catch(err => {
+    document.getElementById('loading').innerHTML =
+      `<div style="color:#ef4444;text-align:center">
+        <p style="font-size:22px;margin-bottom:8px">Failed to load data</p>
+        <p style="color:#64748b;font-size:13px">${err.message}</p>
+       </div>`;
+  });
+
+/* ── KPIs ────────────────────────────────────────────────────────────────── */
+function populateKPIs(s) {
+  document.getElementById('kpi-revenue').textContent   = fmtGBP(s.total_revenue);
+  document.getElementById('kpi-orders').textContent    = fmt(s.total_orders);
+  document.getElementById('kpi-customers').textContent = fmt(s.total_customers);
+  document.getElementById('kpi-aov').textContent       = fmtGBP(s.avg_order_value);
+  document.getElementById('kpi-products').textContent  = fmt(s.total_products);
+  document.getElementById('kpi-units').textContent     = fmt(s.total_units_sold);
+  document.getElementById('date-range-badge').textContent = s.date_range_start + ' → ' + s.date_range_end;
+  document.getElementById('records-badge').textContent = fmt(s.total_orders) + ' orders';
+}
+
+/* ── Line chart helper ───────────────────────────────────────────────────── */
+function lineChart(id, labels, values, hex) {
+  const ctx = document.getElementById(id);
+  if (!ctx) return;
+  const grad = mkGrad(ctx.getContext('2d'), hex);
+  safeChart(id, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        data: values,
+        borderColor: hex,
+        backgroundColor: grad,
+        borderWidth: 2.5, fill: true, tension: 0.4,
+        pointBackgroundColor: hex,
+        pointRadius: isMobile() ? 2 : 3,
+        pointHoverRadius: 6,
+      }]
+    },
+    options: {
+      ...baseOpts(),
+      plugins: { ...baseOpts().plugins,
+        tooltip: { ...TT, callbacks:{ label: c => '  Revenue: '+fmtGBP(c.raw) } }
+      },
+      scales: {
+        ...baseOpts().scales,
+        x: { ...baseOpts().scales.x,
+          ticks: { ...baseOpts().scales.x.ticks,
+            maxTicksLimit: isMobile() ? 6 : 14,
+            maxRotation: isMobile() ? 40 : 0,
+          }
+        }
+      }
+    }
+  });
+}
+
+function buildTrendCharts(monthly, yoy) {
+  /* Only 2010 and 2011 — 2009 has a single month and charts poorly */
+  lineChart('chartMonthlyAll', monthly.map(d=>d.YearMonth), monthly.map(d=>d.Revenue), '#e11d48');
+  const colors = { '2010':'#f59e0b', '2011':'#10b981' };
+  ['2010','2011'].forEach(yr => {
+    const rows = yoy[yr] || [];
+    lineChart('chartYear'+yr, rows.map(r=>r.MonthName), rows.map(r=>r.Revenue), colors[yr]);
+  });
+}
+
+/* ── Product charts (horizontal bar) ────────────────────────────────────── */
+function shortLabel(name, max) {
+  max = max || (isMobile() ? 16 : 22);
+  return name.length > max ? name.slice(0,max)+'…' : name;
+}
+
+function hbarChart(id, labels, values, colors, fmtFn, ttLabel) {
+  safeChart(id, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{ data:values, backgroundColor:colors, borderRadius:5, borderSkipped:false }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: true,
+      animation:{ duration:600, easing:'easeOutQuart' },
+      plugins: { legend:{display:false}, tooltip:{ ...TT, callbacks:{ label: c=>'  '+ttLabel+': '+fmtFn(c.raw) } } },
+      scales: {
+        x: { grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#7a6868', font:{size:isMobile()?8:10}, callback:v=>fmtK(v)} },
+        y: { grid:{display:false}, ticks:{color:'#b0a8a8', font:{size:isMobile()?8:10}} }
+      }
+    }
+  });
+}
+
+function buildProductCharts(byRev, byQty) {
+  hbarChart('chartTopRevenue',
+    byRev.map(d=>shortLabel(d.product)), byRev.map(d=>d.revenue),
+    COLORS, fmtGBP, 'Revenue');
+  hbarChart('chartTopQty',
+    byQty.map(d=>shortLabel(d.product)), byQty.map(d=>d.quantity),
+    [...COLORS].reverse(),
+    v => fmt(v), 'Units');
+}
+
+/* ── Tables ──────────────────────────────────────────────────────────────── */
+function rankCls(i) { return ['rank-1','rank-2','rank-3'][i] ?? 'rank-n'; }
+
+function buildTables(byRev, byQty, totalRev) {
+  const maxRev = byRev[0].revenue;
+  const tbody1 = document.querySelector('#table-revenue tbody');
+  byRev.forEach((d, i) => {
+    const pct = (d.revenue / totalRev * 100).toFixed(1);
+    const bw  = Math.round(d.revenue / maxRev * 100);
+    tbody1.innerHTML += `<tr>
+      <td><span class="rank-badge ${rankCls(i)}">${i+1}</span></td>
+      <td class="td-product" title="${d.product}">${d.product}</td>
+      <td style="white-space:nowrap">${fmtGBP(d.revenue)}</td>
+      <td class="share-cell">
+        <span class="bar-mini" style="width:${bw}px"></span>
+        <span style="color:#64748b;font-size:11px;margin-left:4px">${pct}%</span>
+      </td></tr>`;
+  });
+
+  const maxQty  = byQty[0].quantity;
+  const totQty  = byQty.reduce((a,b) => a+b.quantity, 0);
+  const tbody2  = document.querySelector('#table-qty tbody');
+  byQty.forEach((d, i) => {
+    const pct = (d.quantity / totQty * 100).toFixed(1);
+    const bw  = Math.round(d.quantity / maxQty * 100);
+    tbody2.innerHTML += `<tr>
+      <td><span class="rank-badge ${rankCls(i)}">${i+1}</span></td>
+      <td class="td-product" title="${d.product}">${d.product}</td>
+      <td style="white-space:nowrap">${fmt(d.quantity)}</td>
+      <td class="share-cell">
+        <span class="bar-mini" style="width:${bw}px;background:linear-gradient(90deg,#f59e0b,#fb7185)"></span>
+        <span style="color:#64748b;font-size:11px;margin-left:4px">${pct}%</span>
+      </td></tr>`;
+  });
+}
+
+/* ── Country bar chart ───────────────────────────────────────────────────── */
+function buildCountryChart(data) {
+  safeChart('chartCountry', {
+    type: 'bar',
+    data: {
+      labels: data.map(d=>d.country),
+      datasets: [{ data:data.map(d=>d.revenue), backgroundColor:COLORS, borderRadius:5, borderSkipped:false }]
+    },
+    options: {
+      ...baseOpts(),
+      plugins: { ...baseOpts().plugins,
+        tooltip:{ ...TT, callbacks:{ label: c=>'  Revenue: '+fmtGBP(c.raw) } }
+      },
+      scales: {
+        ...baseOpts().scales,
+        x: { ...baseOpts().scales.x, ticks:{color:'#7a6868', font:{size:isMobile()?8:10}, maxRotation:45} }
+      }
+    }
+  });
+}
+
+/* ── Weekly bar chart ────────────────────────────────────────────────────── */
+function buildWeeklyChart(data) {
+  const mx  = Math.max(...data.map(d=>d.revenue));
+  const colors = data.map(d => {
+    const a = (0.30 + (d.revenue/mx)*0.70).toFixed(2);
+    return `rgba(225,29,72,${a})`;
+  });
+  safeChart('chartWeekly', {
+    type: 'bar',
+    data: {
+      labels: data.map(d => isMobile() ? d.day.slice(0,3) : d.day),
+      datasets: [{ data:data.map(d=>d.revenue), backgroundColor:colors, borderRadius:5, borderSkipped:false }]
+    },
+    options: {
+      ...baseOpts(),
+      plugins: { ...baseOpts().plugins,
+        tooltip:{ ...TT, callbacks:{ label: c=>'  Revenue: '+fmtGBP(c.raw) } }
+      }
+    }
+  });
+}
+
+/* ── Order histogram ─────────────────────────────────────────────────────── */
+function buildHistogram(data) {
+  safeChart('chartHistogram', {
+    type: 'bar',
+    data: {
+      labels: data.map(d=>d.bucket),
+      datasets: [{ data:data.map(d=>d.count), backgroundColor:COLORS, borderRadius:5, borderSkipped:false }]
+    },
+    options: {
+      ...baseOpts(),
+      scales: {
+        x: { grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#7a6868', font:{size:isMobile()?8:11}} },
+        y: { grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#7a6868', font:{size:isMobile()?8:11},
+          callback: v => v>=1000?(v/1000).toFixed(1)+'K':v } }
+      },
+      plugins: { ...baseOpts().plugins,
+        tooltip:{ ...TT, callbacks:{ label: c=>'  Orders: '+fmt(c.raw) } }
+      }
+    }
+  });
+}
+
+/* ── Donut ───────────────────────────────────────────────────────────────── */
+function buildDonut(data) {
+  /* Use a dedicated red-spectrum palette so UK doesn't swamp all other segments */
+  const DONUT_COLORS = [
+    '#e11d48','#f97316','#eab308','#10b981','#06b6d4',
+    '#6366f1','#a855f7','#ec4899','#84cc16','#f43f5e'
+  ];
+  safeChart('chartDonut', {
+    type: 'doughnut',
+    data: {
+      labels: data.map(d=>d.country),
+      datasets: [{
+        data: data.map(d=>d.revenue),
+        backgroundColor: DONUT_COLORS,
+        borderColor: '#100c0c', borderWidth: 3, hoverOffset: 10,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: true, cutout: '62%',
+      plugins: {
+        legend: {
+          display: true,
+          position: isMobile() ? 'bottom' : 'right',
+          labels:{ color:'#b0a8a8', font:{size:11}, boxWidth:12, padding:8 }
+        },
+        tooltip:{ ...TT, callbacks:{ label: c=>'  '+fmtGBP(c.raw) } }
+      }
+    }
+  });
+}
+
+/* ── Insights ────────────────────────────────────────────────────────────── */
+function buildInsights(data) {
+  const s          = data.stats;
+  const topRev     = data.top_products_revenue[0];
+  const topQty     = data.top_products_quantity[0];
+  const topCountry = data.country_sales[0];
+  const monthly    = data.monthly_trend;
+  const peak       = monthly.reduce((a,b) => a.Revenue > b.Revenue ? a : b);
+  const bestDay    = data.weekly_pattern.reduce((a,b) => a.revenue > b.revenue ? a : b);
+
+  /* Inline SVG icons — no emoji */
+  const SVG = {
+    trophy:  '<svg viewBox="0 0 24 24"><path d="M6 9H4a2 2 0 0 1-2-2V5h4"/><path d="M18 9h2a2 2 0 0 0 2-2V5h-4"/><path d="M12 17v4"/><path d="M8 21h8"/><path d="M6 5v4a6 6 0 0 0 12 0V5H6z"/></svg>',
+    box:     '<svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>',
+    calendar:'<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+    globe:   '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+    clock:   '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+    target:  '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
+  };
+
+  const cards = [
+    { svg: SVG.trophy,   title:'#1 Revenue Product',    value: fmtGBP(topRev.revenue),
+      text: `"${topRev.product}" leads all SKUs — ${(topRev.revenue/s.total_revenue*100).toFixed(1)}% of total revenue.` },
+    { svg: SVG.box,      title:'Best-Selling by Volume', value: fmt(topQty.quantity)+' units',
+      text: `"${topQty.product}" is the most purchased item. Keep it fully stocked at all times.` },
+    { svg: SVG.calendar, title:'Peak Sales Month',       value: peak.YearMonth,
+      text: `${peak.YearMonth} generated ${fmtGBP(peak.Revenue)} — the single strongest month on record.` },
+    { svg: SVG.globe,    title:'Top Market',             value: topCountry.country,
+      text: `${topCountry.country} accounts for ${fmtGBP(topCountry.revenue)}. Focus marketing budgets here.` },
+    { svg: SVG.clock,    title:'Best Day to Sell',       value: bestDay.day,
+      text: `${bestDay.day} drives ${fmtGBP(bestDay.revenue)} in revenue. Schedule promotions on this day.` },
+    { svg: SVG.target,   title:'AOV Opportunity',        value: fmtGBP(s.avg_order_value)+' AOV',
+      text: `Average order is ${fmtGBP(s.avg_order_value)}. Upsell bundles to raise basket size above this benchmark.` },
+  ];
+
+  document.getElementById('insights-grid').innerHTML = cards.map(c => `
+    <div class="insight-card">
+      <div class="insight-icon">${c.svg}</div>
+      <div>
+        <div class="insight-title">${c.title}</div>
+        <div class="insight-value">${c.value}</div>
+        <div class="insight-text">${c.text}</div>
+      </div>
+    </div>`).join('');
+}
+
+/* ── Tab switcher ────────────────────────────────────────────────────────── */
+function setupTabs() {
+  document.querySelectorAll('.tabs').forEach(tabsEl => {
+    tabsEl.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const panel = document.getElementById(btn.dataset.tab);
+        if (!panel) return;
+        const container = tabsEl.closest('.card') || tabsEl.parentElement;
+        tabsEl.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        container.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        panel.classList.add('active');
+      });
+    });
+  });
+}
+</script>
+</body>
+</html>
