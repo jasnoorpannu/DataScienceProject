@@ -1,0 +1,1549 @@
+{
+  "stats": {
+    "total_revenue": 20972594.57,
+    "total_orders": 40077,
+    "total_customers": 5878,
+    "total_products": 5399,
+    "avg_order_value": 523.31,
+    "total_units_sold": 11420305,
+    "date_range_start": "2009-12-01",
+    "date_range_end": "2011-12-09"
+  },
+  "monthly_trend": [
+    {
+      "YearMonth": "2009-12",
+      "Revenue": 825685.76,
+      "Orders": 1682
+    },
+    {
+      "YearMonth": "2010-01",
+      "Revenue": 652708.5,
+      "Orders": 1105
+    },
+    {
+      "YearMonth": "2010-02",
+      "Revenue": 553339.74,
+      "Orders": 1201
+    },
+    {
+      "YearMonth": "2010-03",
+      "Revenue": 833570.13,
+      "Orders": 1681
+    },
+    {
+      "YearMonth": "2010-04",
+      "Revenue": 681528.99,
+      "Orders": 1462
+    },
+    {
+      "YearMonth": "2010-05",
+      "Revenue": 659858.86,
+      "Orders": 1500
+    },
+    {
+      "YearMonth": "2010-06",
+      "Revenue": 752270.14,
+      "Orders": 1645
+    },
+    {
+      "YearMonth": "2010-07",
+      "Revenue": 650712.94,
+      "Orders": 1529
+    },
+    {
+      "YearMonth": "2010-08",
+      "Revenue": 697274.91,
+      "Orders": 1425
+    },
+    {
+      "YearMonth": "2010-09",
+      "Revenue": 924333.01,
+      "Orders": 1839
+    },
+    {
+      "YearMonth": "2010-10",
+      "Revenue": 1165483.91,
+      "Orders": 2301
+    },
+    {
+      "YearMonth": "2010-11",
+      "Revenue": 1470272.48,
+      "Orders": 2747
+    },
+    {
+      "YearMonth": "2010-12",
+      "Revenue": 1262598.79,
+      "Orders": 1559
+    },
+    {
+      "YearMonth": "2011-01",
+      "Revenue": 691364.56,
+      "Orders": 1086
+    },
+    {
+      "YearMonth": "2011-02",
+      "Revenue": 523631.89,
+      "Orders": 1100
+    },
+    {
+      "YearMonth": "2011-03",
+      "Revenue": 717639.36,
+      "Orders": 1454
+    },
+    {
+      "YearMonth": "2011-04",
+      "Revenue": 537808.62,
+      "Orders": 1246
+    },
+    {
+      "YearMonth": "2011-05",
+      "Revenue": 770536.02,
+      "Orders": 1681
+    },
+    {
+      "YearMonth": "2011-06",
+      "Revenue": 761739.9,
+      "Orders": 1533
+    },
+    {
+      "YearMonth": "2011-07",
+      "Revenue": 719221.19,
+      "Orders": 1475
+    },
+    {
+      "YearMonth": "2011-08",
+      "Revenue": 759138.38,
+      "Orders": 1361
+    },
+    {
+      "YearMonth": "2011-09",
+      "Revenue": 1058590.17,
+      "Orders": 1837
+    },
+    {
+      "YearMonth": "2011-10",
+      "Revenue": 1154979.3,
+      "Orders": 2040
+    },
+    {
+      "YearMonth": "2011-11",
+      "Revenue": 1509496.33,
+      "Orders": 2769
+    },
+    {
+      "YearMonth": "2011-12",
+      "Revenue": 638810.68,
+      "Orders": 819
+    }
+  ],
+  "top_products_revenue": [
+    {
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 344563.25
+    },
+    {
+      "product": "Manual",
+      "revenue": 340731.33
+    },
+    {
+      "product": "DOTCOM POSTAGE",
+      "revenue": 322657.48
+    },
+    {
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 266923.55
+    },
+    {
+      "product": "PAPER CRAFT , LITTLE BIRDIE",
+      "revenue": 168469.6
+    },
+    {
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 150935.56
+    },
+    {
+      "product": "PARTY BUNTING",
+      "revenue": 149187.05
+    },
+    {
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 132187.92
+    },
+    {
+      "product": "POSTAGE",
+      "revenue": 127597.42
+    },
+    {
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 123141.54
+    }
+  ],
+  "top_products_quantity": [
+    {
+      "product": "WORLD WAR 2 GLIDERS ASSTD DESIGNS",
+      "quantity": 110138
+    },
+    {
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "quantity": 96683
+    },
+    {
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "quantity": 81809
+    },
+    {
+      "product": "PAPER CRAFT , LITTLE BIRDIE",
+      "quantity": 80995
+    },
+    {
+      "product": "JUMBO BAG RED RETROSPOT",
+      "quantity": 79279
+    },
+    {
+      "product": "MEDIUM CERAMIC TOP STORAGE JAR",
+      "quantity": 78033
+    },
+    {
+      "product": "BROCADE RING PURSE ",
+      "quantity": 71430
+    },
+    {
+      "product": "PACK OF 60 PINK PAISLEY CAKE CASES",
+      "quantity": 56794
+    },
+    {
+      "product": "60 TEATIME FAIRY CAKE CASES",
+      "quantity": 54716
+    },
+    {
+      "product": "SMALL POPCORN HOLDER",
+      "quantity": 49948
+    }
+  ],
+  "country_sales": [
+    {
+      "country": "United Kingdom",
+      "revenue": 17870977.78
+    },
+    {
+      "country": "EIRE",
+      "revenue": 664431.78
+    },
+    {
+      "country": "Netherlands",
+      "revenue": 554232.34
+    },
+    {
+      "country": "Germany",
+      "revenue": 431262.46
+    },
+    {
+      "country": "France",
+      "revenue": 356944.6
+    },
+    {
+      "country": "Australia",
+      "revenue": 169968.11
+    },
+    {
+      "country": "Spain",
+      "revenue": 109178.53
+    },
+    {
+      "country": "Switzerland",
+      "revenue": 101011.29
+    },
+    {
+      "country": "Sweden",
+      "revenue": 91903.72
+    },
+    {
+      "country": "Denmark",
+      "revenue": 69862.19
+    }
+  ],
+  "year_over_year": {
+    "2009": [
+      {
+        "Month": 12,
+        "MonthName": "Dec",
+        "Revenue": 825685.76
+      }
+    ],
+    "2010": [
+      {
+        "Month": 1,
+        "MonthName": "Jan",
+        "Revenue": 652708.5
+      },
+      {
+        "Month": 2,
+        "MonthName": "Feb",
+        "Revenue": 553339.74
+      },
+      {
+        "Month": 3,
+        "MonthName": "Mar",
+        "Revenue": 833570.13
+      },
+      {
+        "Month": 4,
+        "MonthName": "Apr",
+        "Revenue": 681528.99
+      },
+      {
+        "Month": 5,
+        "MonthName": "May",
+        "Revenue": 659858.86
+      },
+      {
+        "Month": 6,
+        "MonthName": "Jun",
+        "Revenue": 752270.14
+      },
+      {
+        "Month": 7,
+        "MonthName": "Jul",
+        "Revenue": 650712.94
+      },
+      {
+        "Month": 8,
+        "MonthName": "Aug",
+        "Revenue": 697274.91
+      },
+      {
+        "Month": 9,
+        "MonthName": "Sep",
+        "Revenue": 924333.01
+      },
+      {
+        "Month": 10,
+        "MonthName": "Oct",
+        "Revenue": 1165483.91
+      },
+      {
+        "Month": 11,
+        "MonthName": "Nov",
+        "Revenue": 1470272.48
+      },
+      {
+        "Month": 12,
+        "MonthName": "Dec",
+        "Revenue": 1262598.79
+      }
+    ],
+    "2011": [
+      {
+        "Month": 1,
+        "MonthName": "Jan",
+        "Revenue": 691364.56
+      },
+      {
+        "Month": 2,
+        "MonthName": "Feb",
+        "Revenue": 523631.89
+      },
+      {
+        "Month": 3,
+        "MonthName": "Mar",
+        "Revenue": 717639.36
+      },
+      {
+        "Month": 4,
+        "MonthName": "Apr",
+        "Revenue": 537808.62
+      },
+      {
+        "Month": 5,
+        "MonthName": "May",
+        "Revenue": 770536.02
+      },
+      {
+        "Month": 6,
+        "MonthName": "Jun",
+        "Revenue": 761739.9
+      },
+      {
+        "Month": 7,
+        "MonthName": "Jul",
+        "Revenue": 719221.19
+      },
+      {
+        "Month": 8,
+        "MonthName": "Aug",
+        "Revenue": 759138.38
+      },
+      {
+        "Month": 9,
+        "MonthName": "Sep",
+        "Revenue": 1058590.17
+      },
+      {
+        "Month": 10,
+        "MonthName": "Oct",
+        "Revenue": 1154979.3
+      },
+      {
+        "Month": 11,
+        "MonthName": "Nov",
+        "Revenue": 1509496.33
+      },
+      {
+        "Month": 12,
+        "MonthName": "Dec",
+        "Revenue": 638810.68
+      }
+    ]
+  },
+  "weekly_pattern": [
+    {
+      "day": "Monday",
+      "revenue": 3644756.59
+    },
+    {
+      "day": "Tuesday",
+      "revenue": 4185862.91
+    },
+    {
+      "day": "Wednesday",
+      "revenue": 3601790.37
+    },
+    {
+      "day": "Thursday",
+      "revenue": 4306392.17
+    },
+    {
+      "day": "Friday",
+      "revenue": 3376979.18
+    },
+    {
+      "day": "Saturday",
+      "revenue": 9803.05
+    },
+    {
+      "day": "Sunday",
+      "revenue": 1847010.29
+    }
+  ],
+  "order_histogram": [
+    {
+      "bucket": "<\u00a350",
+      "count": 3546
+    },
+    {
+      "bucket": "\u00a350-100",
+      "count": 2180
+    },
+    {
+      "bucket": "\u00a3100-200",
+      "count": 7790
+    },
+    {
+      "bucket": "\u00a3200-500",
+      "count": 16406
+    },
+    {
+      "bucket": "\u00a3500-1K",
+      "count": 6448
+    },
+    {
+      "bucket": "\u00a31K-2K",
+      "count": 2381
+    },
+    {
+      "bucket": "\u00a32K-5K",
+      "count": 996
+    },
+    {
+      "bucket": ">\u00a35K",
+      "count": 330
+    }
+  ],
+  "heatmap": [
+    {
+      "month": "2009-12",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 7623.93
+    },
+    {
+      "month": "2009-12",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 18574.58
+    },
+    {
+      "month": "2009-12",
+      "product": "Manual",
+      "revenue": 2237.39
+    },
+    {
+      "month": "2009-12",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 10175.26
+    },
+    {
+      "month": "2009-12",
+      "product": "PARTY BUNTING",
+      "revenue": 592.7
+    },
+    {
+      "month": "2009-12",
+      "product": "POSTAGE",
+      "revenue": 2924.95
+    },
+    {
+      "month": "2009-12",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 17357.6
+    },
+    {
+      "month": "2010-01",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 2634.61
+    },
+    {
+      "month": "2010-01",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 11340.51
+    },
+    {
+      "month": "2010-01",
+      "product": "Manual",
+      "revenue": 15621.17
+    },
+    {
+      "month": "2010-01",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 113.42
+    },
+    {
+      "month": "2010-01",
+      "product": "PARTY BUNTING",
+      "revenue": 1585.3
+    },
+    {
+      "month": "2010-01",
+      "product": "POSTAGE",
+      "revenue": 2690.0
+    },
+    {
+      "month": "2010-01",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 14706.69
+    },
+    {
+      "month": "2010-02",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 2699.55
+    },
+    {
+      "month": "2010-02",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 6443.5
+    },
+    {
+      "month": "2010-02",
+      "product": "Manual",
+      "revenue": 4199.53
+    },
+    {
+      "month": "2010-02",
+      "product": "PARTY BUNTING",
+      "revenue": 1689.62
+    },
+    {
+      "month": "2010-02",
+      "product": "POSTAGE",
+      "revenue": 2720.0
+    },
+    {
+      "month": "2010-02",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 8030.57
+    },
+    {
+      "month": "2010-03",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 5229.57
+    },
+    {
+      "month": "2010-03",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 9993.76
+    },
+    {
+      "month": "2010-03",
+      "product": "Manual",
+      "revenue": 54911.62
+    },
+    {
+      "month": "2010-03",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 59.03
+    },
+    {
+      "month": "2010-03",
+      "product": "PARTY BUNTING",
+      "revenue": 4791.33
+    },
+    {
+      "month": "2010-03",
+      "product": "POSTAGE",
+      "revenue": 3888.35
+    },
+    {
+      "month": "2010-03",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 9890.61
+    },
+    {
+      "month": "2010-03",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 14252.4
+    },
+    {
+      "month": "2010-04",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 4734.41
+    },
+    {
+      "month": "2010-04",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 4786.15
+    },
+    {
+      "month": "2010-04",
+      "product": "Manual",
+      "revenue": 23371.46
+    },
+    {
+      "month": "2010-04",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 56.05
+    },
+    {
+      "month": "2010-04",
+      "product": "PARTY BUNTING",
+      "revenue": 7018.85
+    },
+    {
+      "month": "2010-04",
+      "product": "POSTAGE",
+      "revenue": 3718.0
+    },
+    {
+      "month": "2010-04",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 14383.09
+    },
+    {
+      "month": "2010-04",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 10063.26
+    },
+    {
+      "month": "2010-05",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 3584.72
+    },
+    {
+      "month": "2010-05",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 5412.17
+    },
+    {
+      "month": "2010-05",
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 2501.3
+    },
+    {
+      "month": "2010-05",
+      "product": "Manual",
+      "revenue": 5085.46
+    },
+    {
+      "month": "2010-05",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 155.1
+    },
+    {
+      "month": "2010-05",
+      "product": "PARTY BUNTING",
+      "revenue": 9681.51
+    },
+    {
+      "month": "2010-05",
+      "product": "POSTAGE",
+      "revenue": 3201.0
+    },
+    {
+      "month": "2010-05",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 6771.88
+    },
+    {
+      "month": "2010-05",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 11967.49
+    },
+    {
+      "month": "2010-06",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 3065.66
+    },
+    {
+      "month": "2010-06",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 4930.22
+    },
+    {
+      "month": "2010-06",
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 7789.66
+    },
+    {
+      "month": "2010-06",
+      "product": "Manual",
+      "revenue": 43179.57
+    },
+    {
+      "month": "2010-06",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 1001.02
+    },
+    {
+      "month": "2010-06",
+      "product": "PARTY BUNTING",
+      "revenue": 6185.99
+    },
+    {
+      "month": "2010-06",
+      "product": "POSTAGE",
+      "revenue": 3565.2
+    },
+    {
+      "month": "2010-06",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 16590.28
+    },
+    {
+      "month": "2010-06",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 11849.31
+    },
+    {
+      "month": "2010-07",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 5059.09
+    },
+    {
+      "month": "2010-07",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 6655.29
+    },
+    {
+      "month": "2010-07",
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 6681.85
+    },
+    {
+      "month": "2010-07",
+      "product": "Manual",
+      "revenue": 5420.06
+    },
+    {
+      "month": "2010-07",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 539.08
+    },
+    {
+      "month": "2010-07",
+      "product": "PARTY BUNTING",
+      "revenue": 1187.11
+    },
+    {
+      "month": "2010-07",
+      "product": "POSTAGE",
+      "revenue": 2835.5
+    },
+    {
+      "month": "2010-07",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 18865.88
+    },
+    {
+      "month": "2010-07",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 10794.29
+    },
+    {
+      "month": "2010-08",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 5055.63
+    },
+    {
+      "month": "2010-08",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 6671.23
+    },
+    {
+      "month": "2010-08",
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 3793.21
+    },
+    {
+      "month": "2010-08",
+      "product": "Manual",
+      "revenue": 10731.91
+    },
+    {
+      "month": "2010-08",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 776.14
+    },
+    {
+      "month": "2010-08",
+      "product": "PARTY BUNTING",
+      "revenue": 5502.11
+    },
+    {
+      "month": "2010-08",
+      "product": "POSTAGE",
+      "revenue": 2768.88
+    },
+    {
+      "month": "2010-08",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 13271.28
+    },
+    {
+      "month": "2010-08",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 12846.71
+    },
+    {
+      "month": "2010-09",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 6841.21
+    },
+    {
+      "month": "2010-09",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 6436.58
+    },
+    {
+      "month": "2010-09",
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 13620.53
+    },
+    {
+      "month": "2010-09",
+      "product": "Manual",
+      "revenue": 41085.05
+    },
+    {
+      "month": "2010-09",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 3267.07
+    },
+    {
+      "month": "2010-09",
+      "product": "PARTY BUNTING",
+      "revenue": 3873.57
+    },
+    {
+      "month": "2010-09",
+      "product": "POSTAGE",
+      "revenue": 4404.0
+    },
+    {
+      "month": "2010-09",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 24771.17
+    },
+    {
+      "month": "2010-09",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 11895.17
+    },
+    {
+      "month": "2010-10",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 9431.3
+    },
+    {
+      "month": "2010-10",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 7071.43
+    },
+    {
+      "month": "2010-10",
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 8172.34
+    },
+    {
+      "month": "2010-10",
+      "product": "Manual",
+      "revenue": 52738.38
+    },
+    {
+      "month": "2010-10",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 8447.92
+    },
+    {
+      "month": "2010-10",
+      "product": "PARTY BUNTING",
+      "revenue": 4182.11
+    },
+    {
+      "month": "2010-10",
+      "product": "POSTAGE",
+      "revenue": 6678.78
+    },
+    {
+      "month": "2010-10",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 23904.01
+    },
+    {
+      "month": "2010-10",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 12829.41
+    },
+    {
+      "month": "2010-11",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 14626.47
+    },
+    {
+      "month": "2010-11",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 15289.92
+    },
+    {
+      "month": "2010-11",
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 11469.82
+    },
+    {
+      "month": "2010-11",
+      "product": "Manual",
+      "revenue": 2935.52
+    },
+    {
+      "month": "2010-11",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 28341.81
+    },
+    {
+      "month": "2010-11",
+      "product": "PARTY BUNTING",
+      "revenue": 2601.45
+    },
+    {
+      "month": "2010-11",
+      "product": "POSTAGE",
+      "revenue": 8167.88
+    },
+    {
+      "month": "2010-11",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 28151.33
+    },
+    {
+      "month": "2010-11",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 18445.75
+    },
+    {
+      "month": "2010-12",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 6492.71
+    },
+    {
+      "month": "2010-12",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 37474.56
+    },
+    {
+      "month": "2010-12",
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 6585.95
+    },
+    {
+      "month": "2010-12",
+      "product": "Manual",
+      "revenue": 3581.65
+    },
+    {
+      "month": "2010-12",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 14483.15
+    },
+    {
+      "month": "2010-12",
+      "product": "PARTY BUNTING",
+      "revenue": 1998.81
+    },
+    {
+      "month": "2010-12",
+      "product": "POSTAGE",
+      "revenue": 6345.0
+    },
+    {
+      "month": "2010-12",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 41348.94
+    },
+    {
+      "month": "2010-12",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 16826.35
+    },
+    {
+      "month": "2011-01",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 2920.59
+    },
+    {
+      "month": "2011-01",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 13921.82
+    },
+    {
+      "month": "2011-01",
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 5047.65
+    },
+    {
+      "month": "2011-01",
+      "product": "Manual",
+      "revenue": 96.9
+    },
+    {
+      "month": "2011-01",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 143.32
+    },
+    {
+      "month": "2011-01",
+      "product": "PARTY BUNTING",
+      "revenue": 2288.36
+    },
+    {
+      "month": "2011-01",
+      "product": "POSTAGE",
+      "revenue": 5138.43
+    },
+    {
+      "month": "2011-01",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 12800.6
+    },
+    {
+      "month": "2011-01",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 15276.25
+    },
+    {
+      "month": "2011-02",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 2736.35
+    },
+    {
+      "month": "2011-02",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 10060.57
+    },
+    {
+      "month": "2011-02",
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 5617.24
+    },
+    {
+      "month": "2011-02",
+      "product": "Manual",
+      "revenue": 1237.45
+    },
+    {
+      "month": "2011-02",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 24.95
+    },
+    {
+      "month": "2011-02",
+      "product": "PARTY BUNTING",
+      "revenue": 4347.9
+    },
+    {
+      "month": "2011-02",
+      "product": "POSTAGE",
+      "revenue": 3166.0
+    },
+    {
+      "month": "2011-02",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 11009.49
+    },
+    {
+      "month": "2011-02",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 5140.11
+    },
+    {
+      "month": "2011-03",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 4302.7
+    },
+    {
+      "month": "2011-03",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 11829.71
+    },
+    {
+      "month": "2011-03",
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 10118.38
+    },
+    {
+      "month": "2011-03",
+      "product": "Manual",
+      "revenue": 8236.38
+    },
+    {
+      "month": "2011-03",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 232.01
+    },
+    {
+      "month": "2011-03",
+      "product": "PARTY BUNTING",
+      "revenue": 9123.02
+    },
+    {
+      "month": "2011-03",
+      "product": "POSTAGE",
+      "revenue": 5337.57
+    },
+    {
+      "month": "2011-03",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 18372.0
+    },
+    {
+      "month": "2011-03",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 5597.9
+    },
+    {
+      "month": "2011-04",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 4174.24
+    },
+    {
+      "month": "2011-04",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 7535.38
+    },
+    {
+      "month": "2011-04",
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 4878.08
+    },
+    {
+      "month": "2011-04",
+      "product": "Manual",
+      "revenue": 10108.5
+    },
+    {
+      "month": "2011-04",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 44.03
+    },
+    {
+      "month": "2011-04",
+      "product": "PARTY BUNTING",
+      "revenue": 10778.47
+    },
+    {
+      "month": "2011-04",
+      "product": "POSTAGE",
+      "revenue": 3409.95
+    },
+    {
+      "month": "2011-04",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 14812.95
+    },
+    {
+      "month": "2011-04",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 10017.79
+    },
+    {
+      "month": "2011-05",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 5052.12
+    },
+    {
+      "month": "2011-05",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 10229.3
+    },
+    {
+      "month": "2011-05",
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 7122.73
+    },
+    {
+      "month": "2011-05",
+      "product": "Manual",
+      "revenue": 5221.23
+    },
+    {
+      "month": "2011-05",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 65.19
+    },
+    {
+      "month": "2011-05",
+      "product": "PARTY BUNTING",
+      "revenue": 19147.75
+    },
+    {
+      "month": "2011-05",
+      "product": "POSTAGE",
+      "revenue": 13358.75
+    },
+    {
+      "month": "2011-05",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 12645.97
+    },
+    {
+      "month": "2011-05",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 11415.32
+    },
+    {
+      "month": "2011-06",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 2627.64
+    },
+    {
+      "month": "2011-06",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 11848.66
+    },
+    {
+      "month": "2011-06",
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 7247.98
+    },
+    {
+      "month": "2011-06",
+      "product": "Manual",
+      "revenue": 4927.88
+    },
+    {
+      "month": "2011-06",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 910.88
+    },
+    {
+      "month": "2011-06",
+      "product": "PARTY BUNTING",
+      "revenue": 12561.07
+    },
+    {
+      "month": "2011-06",
+      "product": "POSTAGE",
+      "revenue": 5536.48
+    },
+    {
+      "month": "2011-06",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 9745.39
+    },
+    {
+      "month": "2011-06",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 4707.33
+    },
+    {
+      "month": "2011-07",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 3129.49
+    },
+    {
+      "month": "2011-07",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 12841.0
+    },
+    {
+      "month": "2011-07",
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 6253.87
+    },
+    {
+      "month": "2011-07",
+      "product": "Manual",
+      "revenue": 11107.8
+    },
+    {
+      "month": "2011-07",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 1077.93
+    },
+    {
+      "month": "2011-07",
+      "product": "PARTY BUNTING",
+      "revenue": 14576.5
+    },
+    {
+      "month": "2011-07",
+      "product": "POSTAGE",
+      "revenue": 5324.65
+    },
+    {
+      "month": "2011-07",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 13987.11
+    },
+    {
+      "month": "2011-07",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 8630.08
+    },
+    {
+      "month": "2011-08",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 9882.25
+    },
+    {
+      "month": "2011-08",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 13400.52
+    },
+    {
+      "month": "2011-08",
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 10796.56
+    },
+    {
+      "month": "2011-08",
+      "product": "Manual",
+      "revenue": 3312.04
+    },
+    {
+      "month": "2011-08",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 1334.94
+    },
+    {
+      "month": "2011-08",
+      "product": "PARTY BUNTING",
+      "revenue": 9694.85
+    },
+    {
+      "month": "2011-08",
+      "product": "POSTAGE",
+      "revenue": 5358.6
+    },
+    {
+      "month": "2011-08",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 10534.05
+    },
+    {
+      "month": "2011-08",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 5733.28
+    },
+    {
+      "month": "2011-09",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 4993.52
+    },
+    {
+      "month": "2011-09",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 15177.4
+    },
+    {
+      "month": "2011-09",
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 8884.33
+    },
+    {
+      "month": "2011-09",
+      "product": "Manual",
+      "revenue": 6085.19
+    },
+    {
+      "month": "2011-09",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 6006.1
+    },
+    {
+      "month": "2011-09",
+      "product": "PARTY BUNTING",
+      "revenue": 6402.95
+    },
+    {
+      "month": "2011-09",
+      "product": "POSTAGE",
+      "revenue": 5897.22
+    },
+    {
+      "month": "2011-09",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 9619.53
+    },
+    {
+      "month": "2011-09",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 7123.21
+    },
+    {
+      "month": "2011-10",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 4686.48
+    },
+    {
+      "month": "2011-10",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 17955.13
+    },
+    {
+      "month": "2011-10",
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 10485.81
+    },
+    {
+      "month": "2011-10",
+      "product": "Manual",
+      "revenue": 21548.67
+    },
+    {
+      "month": "2011-10",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 10031.39
+    },
+    {
+      "month": "2011-10",
+      "product": "PARTY BUNTING",
+      "revenue": 3716.48
+    },
+    {
+      "month": "2011-10",
+      "product": "POSTAGE",
+      "revenue": 8025.96
+    },
+    {
+      "month": "2011-10",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 13281.24
+    },
+    {
+      "month": "2011-10",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 4848.14
+    },
+    {
+      "month": "2011-11",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 8440.94
+    },
+    {
+      "month": "2011-11",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 36905.4
+    },
+    {
+      "month": "2011-11",
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 11641.37
+    },
+    {
+      "month": "2011-11",
+      "product": "Manual",
+      "revenue": 3312.42
+    },
+    {
+      "month": "2011-11",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 28985.04
+    },
+    {
+      "month": "2011-11",
+      "product": "PARTY BUNTING",
+      "revenue": 4740.76
+    },
+    {
+      "month": "2011-11",
+      "product": "POSTAGE",
+      "revenue": 10352.98
+    },
+    {
+      "month": "2011-11",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 13799.58
+    },
+    {
+      "month": "2011-11",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 14362.12
+    },
+    {
+      "month": "2011-12",
+      "product": "ASSORTED COLOUR BIRD ORNAMENT",
+      "revenue": 2162.74
+    },
+    {
+      "month": "2011-12",
+      "product": "DOTCOM POSTAGE",
+      "revenue": 19872.69
+    },
+    {
+      "month": "2011-12",
+      "product": "JUMBO BAG RED RETROSPOT",
+      "revenue": 2226.9
+    },
+    {
+      "month": "2011-12",
+      "product": "Manual",
+      "revenue": 438.1
+    },
+    {
+      "month": "2011-12",
+      "product": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "revenue": 6870.71
+    },
+    {
+      "month": "2011-12",
+      "product": "PAPER CRAFT , LITTLE BIRDIE",
+      "revenue": 168469.6
+    },
+    {
+      "month": "2011-12",
+      "product": "PARTY BUNTING",
+      "revenue": 918.48
+    },
+    {
+      "month": "2011-12",
+      "product": "POSTAGE",
+      "revenue": 2783.29
+    },
+    {
+      "month": "2011-12",
+      "product": "REGENCY CAKESTAND 3 TIER",
+      "revenue": 6006.87
+    },
+    {
+      "month": "2011-12",
+      "product": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "revenue": 2207.02
+    }
+  ]
+}
